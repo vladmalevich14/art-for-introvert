@@ -1,0 +1,11 @@
+import {Typography} from "antd";
+
+const {Title} = Typography
+
+export const NotFound = () => {
+    return (
+        <div>
+            <Title level={1}>Ошибка 404</Title>
+        </div>
+    );
+};

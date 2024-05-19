@@ -1,0 +1,92 @@
+import {Button, Card, List, Skeleton, Typography} from "antd";
+import {Comment} from '@ant-design/compatible';
+import React, {useEffect} from "react";
+import {capitalizeFirstLetter} from "utils/capitalizeFirstLetter";
+import styles from './full-post.module.scss'
+import {useAppDispatch} from "hooks/useAppDispatch";
+import {postThunks} from "app/selected-post-reducer";
+import {useSelector} from "react-redux";
+import {RootStateType} from "app/store";
+import {useNavigate} from "react-router-dom";
+import {LeftOutlined} from "@ant-design/icons";
+
+type PropsType = {
+    selectedPostKey: string
+}
+
+const contentStyle: React.CSSProperties = {
+    margin: 0,
+    background: 'linear-gradient(95deg, rgb(250, 202, 23) 20%, rgb(255, 156, 72) 80%)',
+    textAlign: 'left',
+    color: 'rgba(0, 0, 0, 0.88)',
+    fontSize: 14,
+    lineHeight: '1.55',
+    fontWeight: 400,
+    boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+}
+
+const titleStyle: React.CSSProperties = {
+    whiteSpace: 'normal',
+    wordWrap: 'break-word',
+    fontSize: 16,
+    fontWeight: 700,
+    lineHeight: 1.35,
+};
+
+const {Title} = Typography;
+
+export const FullPost = ({selectedPostKey}: PropsType) => {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const post = useSelector((state: RootStateType) => state.selectedPost)
+
+    const onChangeHandler = (value: string) => {
+        dispatch(postThunks.editPostTitle({postId: selectedPostKey, title: value}))
+    }
+
+    useEffect(() => {
+        dispatch(postThunks.getPost(selectedPostKey))
+        dispatch(postThunks.getComments(selectedPostKey))
+    }, [selectedPostKey]);
+
+    if (!post.postContent || !post.comments) {
+        return <Skeleton paragraph={{rows: 10}} active/>
+    }
+
+    return (
+        <div>
+            <Button onClick={() => navigate(-1)} className={styles.backArrow}>
+                <LeftOutlined/>
+            </Button>
+
+            <Card title={
+                <Title level={3}
+                       style={titleStyle}
+                       editable={{onChange: onChangeHandler}}
+                >
+                    {capitalizeFirstLetter(post.postContent.title)}
+                </Title>}
+                  style={contentStyle}
+                  className={styles.card}>
+                <p className={styles.postContent}>{capitalizeFirstLetter(post.postContent.body)}</p>
+            </Card>
+            <Title level={3}>Comments</Title>
+            <List
+                className={styles.list}
+                header={`${post.comments.length} replies`}
+                itemLayout="horizontal"
+                dataSource={post.comments}
+                renderItem={item => (
+                    <li>
+                        <Comment
+                            author={item.name}
+                            avatar={'https://static.tildacdn.com/tild3034-3530-4533-a538-303733316465/Group_120676.svg'}
+                            content={capitalizeFirstLetter(item.body)}
+                            className={styles.listItem}
+                        />
+                    </li>
+                )}
+            />
+        </div>
+    );
+};

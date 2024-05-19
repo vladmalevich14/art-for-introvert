@@ -1,0 +1,7 @@
+.navbar {
+  :global(.ant-menu-item-selected) {
+    background: linear-gradient(95deg, rgb(250, 202, 23) 20%, rgb(255, 156, 72) 80%);
+    color: white;
+  }
+}
+
