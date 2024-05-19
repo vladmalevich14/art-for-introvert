@@ -1,5 +1,6 @@
-import React from "react";
-import {Layout, theme} from "antd";
+import React, {CSSProperties} from "react";
+import { Image, Layout, theme} from "antd";
+import {Link} from "react-router-dom";
 import styles from './header.module.scss'
 
 const {Header} = Layout;
@@ -7,24 +8,28 @@ const {Header} = Layout;
 export const HeaderComponent = () => {
     const {token: {colorBgContainer}} = theme.useToken();
 
-    const headerStyle: React.CSSProperties = {
+    const headerStyle: CSSProperties = {
         display: "flex",
         justifyContent: 'flex-start',
         alignItems: 'center',
         padding: 0,
         background: colorBgContainer,
-        height: '60px'
+        height: '60px',
+        boxShadow: '0 0 10px rgba(0,0,0,0.1)'
     }
 
     return (
         <Header style={headerStyle}>
-            <a href="https://online.artforintrovert.ru/" target={'_blank'} rel="noreferrer" className={styles.link}>
-                <img
+            <Link to={'https://online.artforintrovert.ru/'} target={'_blank'} className={styles.link}>
+                <Image
                 src={'https://static.tildacdn.com/tild3733-3439-4138-b035-643537353037/Frame_19.svg'}
-                className={styles.headerLogo}
+                width={150}
+                height={40}
+                preview={false}
+                className={styles.linkHeaderLogo}
                 alt={'art for introvert logo'}
                 />
-            </a>
+            </Link>
         </Header>
     );
 };

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {UserOutlined} from '@ant-design/icons';
+import {CopyrightOutlined, UserOutlined} from '@ant-design/icons';
 import type {MenuProps} from 'antd';
 import {Layout, Spin} from 'antd';
 import {useSelector} from "react-redux";
@@ -55,23 +55,22 @@ const App: React.FC = () => {
         <Layout hasSider style={{minHeight: '100vh'}}>
             <NavBarMenu items={items} onSelect={onSelect} selectedUserKey={selectedUserKey}/>
             <Layout style={{marginLeft: 225}}>
-                <HeaderComponent/>
+                <HeaderComponent />
                 <Content style={{margin: '24px 16px 0', overflow: 'initial'}}>
                     <Routes>
                         <Route element={<Navigate to='/art-for-introvert'/>} path={'/'}/>
                         <Route path={"/art-for-introvert"} element={<StartPage/>}/>
                         <Route path={'/posts/:userId'}
                                element={<Posts selectedUserKey={selectedUserKey}
-                                               setSelectedPostKey={setSelectedPostKey}
-                               />}
+                                               setSelectedPostKey={setSelectedPostKey}/>}
                         />
                         <Route path={'/message'} element={<FullPost selectedPostKey={selectedPostKey}/>}>
                             <Route path={':userId'} element={<FullPost selectedPostKey={selectedPostKey}/>}/>
                         </Route>
-                        <Route element={<NotFound />} path={'*'}/>
+                        <Route element={<NotFound/>} path={'*'}/>
                     </Routes>
                 </Content>
-                <Footer style={{textAlign: 'center'}}>ООО "АРТИНТРОВЕРТ" ©{new Date().getFullYear()}</Footer>
+                <Footer style={{textAlign: 'center'}}>ООО "АРТИНТРОВЕРТ" <CopyrightOutlined /> {new Date().getFullYear()}</Footer>
             </Layout>
         </Layout>
     );

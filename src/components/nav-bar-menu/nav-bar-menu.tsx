@@ -1,5 +1,5 @@
-import {Layout, Menu, MenuProps, Skeleton} from "antd";
 import React from "react";
+import {Layout, Menu, MenuProps, Skeleton} from "antd";
 import {SelectEventType} from "types/types";
 import styles from './nav-bar-menu.module.scss'
 
@@ -21,7 +21,7 @@ export const NavBarMenu = ({items, onSelect, selectedUserKey}: PropsType) => {
         <div className={styles.navbar}>
             <Sider
                 width={225}
-                style={{overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0}}
+                style={{overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0,     boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}
                 theme={'light'}
             >
                 {items?.length ? <Menu

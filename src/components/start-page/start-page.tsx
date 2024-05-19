@@ -1,6 +1,6 @@
-import styles from "components/posts/posts.module.scss";
-import {Flex, Image} from "antd";
 import React from "react";
+import {Flex, Image} from "antd";
+import styles from "./start-page.module.scss";
 
 export const StartPage = () => {
     return (
@@ -12,7 +12,7 @@ export const StartPage = () => {
                     src="https://optim.tildacdn.com/tild6436-3636-4165-a461-613661323536/-/format/webp/Group_12085726.png"
                     preview={false}
                     alt={'self-development'}
-                    style={{borderRadius: '30px'}}
+                    style={{borderRadius: '30px', boxShadow: '0 0 10px rgba(0,0,0,0.1)'}}
                 />
                 <Image
                     width={250}

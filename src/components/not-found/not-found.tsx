@@ -1,12 +1,13 @@
 import {Button, ConfigProvider, Typography} from "antd";
 import {TinyColor} from '@ctrl/tinycolor'
-import styles from './not-found.module.scss'
 import {useNavigate} from "react-router-dom";
+import styles from './not-found.module.scss'
 
 const {Title, Paragraph} = Typography
 
 export const NotFound = () => {
     const navigate = useNavigate()
+
     const colors = ['rgb(250, 202, 23)', 'rgb(255, 156, 72)'];
     const getHoverColors = (colors: string[]) =>
         colors.map((color) => new TinyColor(color).lighten(5).toString());
@@ -20,8 +21,8 @@ export const NotFound = () => {
     return (
         <div className={styles.notFound}>
             <Title level={1}>Ошибка 404</Title>
-            <Paragraph>Такой страницы не существует,
-                либо она была удалена</Paragraph>
+            <Paragraph>Такой страницы не существует, либо она была удалена</Paragraph>
+
             <ConfigProvider
                 theme={{
                     components: {

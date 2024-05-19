@@ -1,6 +1,6 @@
+import React, {Dispatch, SetStateAction, useEffect} from "react";
 import {Flex, Skeleton} from "antd";
 import {PostCard} from "components/post-card/post-card";
-import React, {Dispatch, SetStateAction, useEffect} from "react";
 import {postsThunks} from "app/posts-reducer";
 import {useAppDispatch} from "hooks/useAppDispatch";
 import {useSelector} from "react-redux";
@@ -26,11 +26,10 @@ export const Posts = ({selectedUserKey, setSelectedPostKey}: PropsType) => {
     return (
         <Flex wrap gap="large" vertical={false} justify={'center'}>
             {posts.length && posts.map(post => {
-                    return <PostCard key={post.id} postId={post.id} userId={post.userId} title={post.title} body={post.body}
-                                     setSelectedPostKey={setSelectedPostKey}
-                    />
-
-                })}
+                return <PostCard key={post.id} postId={post.id} userId={post.userId} title={post.title} body={post.body}
+                                 setSelectedPostKey={setSelectedPostKey}
+                />
+            })}
         </Flex>
     );
 };

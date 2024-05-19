@@ -1,8 +1,8 @@
+import React, {CSSProperties, Dispatch, SetStateAction} from "react";
 import {Card, Typography} from "antd";
-import React, {Dispatch, SetStateAction} from "react";
 import {capitalizeFirstLetter} from "utils/capitalizeFirstLetter";
-import styles from 'components/post-card/post-card.module.scss'
 import {useNavigate} from "react-router-dom";
+import styles from 'components/post-card/post-card.module.scss'
 
 type PropsType = {
     title: string
@@ -12,7 +12,7 @@ type PropsType = {
     setSelectedPostKey: Dispatch<SetStateAction<string>>
 }
 
-const contentStyle: React.CSSProperties = {
+const contentStyle: CSSProperties = {
     maxWidth: '260px',
     margin: 0,
     background: 'linear-gradient(95deg, rgb(250, 202, 23) 20%, rgb(255, 156, 72) 80%)',
@@ -22,10 +22,10 @@ const contentStyle: React.CSSProperties = {
     lineHeight: '1.55',
     fontWeight: 400,
     boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-    height: '300px'
+    height: '300px',
 }
 
-const titleStyle: React.CSSProperties = {
+const titleStyle: CSSProperties = {
     whiteSpace: 'normal',
     wordWrap: 'break-word',
     fontSize: 16,
@@ -44,14 +44,13 @@ export const PostCard = ({title, body, postId, userId, setSelectedPostKey}: Prop
         navigate(`/message/${userId}`)
     }
 
+    const titleComponent = <Title level={3} style={titleStyle}>{capitalizeFirstLetter(title)}</Title>
+
     return (
-            <Card title={
-                <Title level={3}
-                       style={titleStyle}
-                >
-                    {capitalizeFirstLetter(title)}</Title>}
-                  style={contentStyle} className={styles.card} onClick={onClickHandler}>
-            <p className={styles.postContent}>{capitalizeFirstLetter(body)}</p>
+        <Card style={contentStyle} className={styles.card} onClick={onClickHandler} title={titleComponent}>
+            <p className={styles.cardPostContent}>
+                {capitalizeFirstLetter(body)}
+            </p>
         </Card>
     );
 };

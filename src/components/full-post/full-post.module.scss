@@ -1,5 +1,16 @@
 .backArrow {
   margin-bottom: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  :global(.ant-card-head) {
+    padding: 0;
+  }
+
+  .title {
+    padding: 15px 0 0 24px;
+  }
 }
 
 .list {
@@ -11,3 +22,4 @@
     }
   }
 }
+
