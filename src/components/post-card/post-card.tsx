@@ -1,7 +1,7 @@
 import {Card, Typography} from "antd";
 import React, {Dispatch, SetStateAction} from "react";
 import {capitalizeFirstLetter} from "utils/capitalizeFirstLetter";
-import styles from 'componenst/post-card/post-card.module.scss'
+import styles from 'components/post-card/post-card.module.scss'
 import {useNavigate} from "react-router-dom";
 
 type PropsType = {

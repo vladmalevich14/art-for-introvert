@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux'
-import type { RootStateType, AppDispatch } from './store'
+import {useDispatch} from 'react-redux'
+import type {AppDispatch} from 'app/store'
 
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>()

@@ -1,10 +1,7 @@
 import {instance} from "app/api/common-api";
-import {CommentsType, PostType, UserType} from "types/types";
+import {CommentsType, PostType} from "types/types";
 
-export const usersApi = {
-    getUsers() {
-        return instance.get<UserType[]>("users");
-    },
+export const postsApi = {
     getAllPosts(id: string) {
         return instance.get<PostType[]>(`posts?userId=${id}`);
     },

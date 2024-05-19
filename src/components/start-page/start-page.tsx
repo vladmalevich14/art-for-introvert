@@ -1,4 +1,4 @@
-import styles from "componenst/posts/posts.module.scss";
+import styles from "components/posts/posts.module.scss";
 import {Flex, Image} from "antd";
 import React from "react";
 

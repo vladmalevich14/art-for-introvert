@@ -1,46 +1,34 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {PostType, UserType} from "types/types";
-import {usersApi} from "app/users-api";
+import {PostType} from "types/types";
 import {createAppAsyncThunk} from "utils/create-app-async-thunk";
+import {postsApi} from "app/api/posts-api";
 
-const fetchUsers = createAppAsyncThunk<{ users: UserType[] }, void>(
-    "users/fetchUsers",
-    async (_, thunkAPI) => {
+const fetchAllPosts = createAppAsyncThunk<{ posts: PostType[] }, string>(
+    "posts/fetchAllPosts",
+    async (id, thunkAPI) => {
         const {rejectWithValue} = thunkAPI;
         try {
-            const res = await usersApi.getUsers();
-            return {users: res.data};
+            const res = await postsApi.getAllPosts(id);
+            return {posts: res.data};
         } catch (e) {
             return rejectWithValue(null);
         }
     },
 );
 
-const fetchPosts = createAppAsyncThunk<{ posts: PostType[] }, void>(
-    "users/fetchUsers",
-    async (_, thunkAPI) => {
-        const {rejectWithValue} = thunkAPI;
-        try {
-            const res = await usersApi.getPosts();
-            return {users: res.data};
-        } catch (e) {
-            return rejectWithValue(null);
-        }
-    },
-);
-
-const initialState: UserType[] = [];
+const initialState: PostType[] = [];
 
 const slice = createSlice({
-    name: 'users',
+    name: 'posts',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchUsers.fulfilled, (state, action) => {
-            return action.payload.users.map((user) => ({...user}));
+        builder
+            .addCase(fetchAllPosts.fulfilled, (state, action) => {
+            return action.payload.posts.map((post) => ({...post}));
         })
     }
 })
 
-export const usersReducer = slice.reducer;
-export const tasksThunks = {fetchUsers};
+export const postsReducer = slice.reducer;
+export const postsThunks = {fetchAllPosts};

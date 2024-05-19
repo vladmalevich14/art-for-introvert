@@ -1,5 +1,5 @@
 import {Flex, Skeleton} from "antd";
-import {PostCard} from "componenst/post-card/post-card";
+import {PostCard} from "components/post-card/post-card";
 import React, {Dispatch, SetStateAction, useEffect} from "react";
 import {postsThunks} from "app/posts-reducer";
 import {useAppDispatch} from "hooks/useAppDispatch";
@@ -9,10 +9,9 @@ import {RootStateType} from "app/store";
 type PropsType = {
     selectedUserKey: string
     setSelectedPostKey: Dispatch<SetStateAction<string>>
-    selectedPostKey: string
 }
 
-export const Posts = ({selectedUserKey, setSelectedPostKey, selectedPostKey}: PropsType) => {
+export const Posts = ({selectedUserKey, setSelectedPostKey}: PropsType) => {
     const dispatch = useAppDispatch();
     const posts = useSelector((state: RootStateType) => state.posts)
 
