@@ -14,7 +14,6 @@ import {Posts} from "components/posts/posts";
 import {FullPost} from "components/full-post/full-post";
 import {StartPage} from "components/start-page/start-page";
 import {NotFound} from "components/not-found/not-found";
-import markupBannerRec from 'assets/images/markupBanner.jpg'
 import {useResize} from "hooks/useResize";
 
 const {Content, Footer} = Layout;
@@ -56,14 +55,6 @@ const App: React.FC = () => {
 
     return (
         <Layout hasSider style={{minHeight: '100vh'}}>
-            <meta property="og:image" content={markupBannerRec} />
-            <meta property="og:image:type" content="image/jpeg" />
-            <meta property="og:image:width" content="750" />
-            <meta property="og:image:height" content="500" />
-            <meta property="vk:image" content={markupBannerRec} />
-            <meta property="fb:image" content={markupBannerRec} />
-            <meta property="twitter:card" content="summary_large_image" />
-            <meta property="twitter:image" content={markupBannerRec} />
             <NavBarMenu items={items} onSelect={onSelect} selectedUserKey={selectedUserKey}/>
             <Layout style={{marginLeft: screenWidth > 575 ? 225 : 80}}>
                 <HeaderComponent />
