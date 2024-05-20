@@ -19,7 +19,7 @@ export const HeaderComponent = () => {
 
     return (
         <Header style={headerStyle}>
-            <a href={'/'} className={styles.link}>
+            <a href={'/art-for-introvert'} className={styles.link}>
                 <Image
                     src={'https://static.tildacdn.com/tild3733-3439-4138-b035-643537353037/Frame_19.svg'}
                     width={150}
