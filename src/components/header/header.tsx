@@ -1,6 +1,5 @@
 import React, {CSSProperties} from "react";
-import { Image, Layout, theme} from "antd";
-import {Link} from "react-router-dom";
+import {Image, Layout, theme} from "antd";
 import styles from './header.module.scss'
 
 const {Header} = Layout;
@@ -20,16 +19,16 @@ export const HeaderComponent = () => {
 
     return (
         <Header style={headerStyle}>
-            <Link to={'https://online.artforintrovert.ru/'} target={'_blank'} className={styles.link}>
+            <a href={'/'} className={styles.link}>
                 <Image
-                src={'https://static.tildacdn.com/tild3733-3439-4138-b035-643537353037/Frame_19.svg'}
-                width={150}
-                height={40}
-                preview={false}
-                className={styles.linkHeaderLogo}
-                alt={'art for introvert logo'}
+                    src={'https://static.tildacdn.com/tild3733-3439-4138-b035-643537353037/Frame_19.svg'}
+                    width={150}
+                    height={40}
+                    preview={false}
+                    className={styles.linkHeaderLogo}
+                    alt={'art for introvert logo'}
                 />
-            </Link>
+            </a>
         </Header>
     );
 };
