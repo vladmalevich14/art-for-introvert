@@ -60,8 +60,9 @@ const App: React.FC = () => {
                 <HeaderComponent />
                 <Content style={{margin: '24px 16px 0', overflow: 'initial'}}>
                     <Routes>
-                        <Route element={<Navigate to='/art-for-introvert'/>} path={'/'}/>
-                        <Route path={"/art-for-introvert"} element={<StartPage/>}/>
+                        {/*<Route element={<Navigate to='/art-for-introvert'/>} path={'/'}/>*/}
+                        {/*<Route path={"/art-for-introvert"} element={<StartPage/>}/>*/}
+                        <Route path={"/"} element={<StartPage/>}/>
                         <Route path={'/posts/:userId'}
                                element={<Posts selectedUserKey={selectedUserKey}
                                                setSelectedPostKey={setSelectedPostKey}/>}
