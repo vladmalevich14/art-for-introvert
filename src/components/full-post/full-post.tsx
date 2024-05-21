@@ -3,13 +3,12 @@ import {Button, Card, List, Skeleton, Typography} from "antd";
 import {Comment} from '@ant-design/compatible';
 import {capitalizeFirstLetter} from "utils/capitalizeFirstLetter";
 import {useAppDispatch} from "hooks/useAppDispatch";
-import {postThunks} from "app/selected-post-reducer";
+import {editPostTitle, getComments, getPost} from "app/reducers/selected-post-reducer";
 import {useSelector} from "react-redux";
 import {RootStateType} from "app/store";
 import {useNavigate} from "react-router-dom";
 import {LeftOutlined} from "@ant-design/icons";
 import styles from './full-post.module.scss'
-
 
 type PropsType = {
     selectedPostKey: string
@@ -42,12 +41,12 @@ export const FullPost = ({selectedPostKey}: PropsType) => {
     const post = useSelector((state: RootStateType) => state.selectedPost)
 
     const onChangeHandler = (value: string) => {
-        dispatch(postThunks.editPostTitle({postId: selectedPostKey, title: value}))
+        dispatch(editPostTitle(selectedPostKey, value))
     }
 
     useEffect(() => {
-        dispatch(postThunks.getPost(selectedPostKey))
-        dispatch(postThunks.getComments(selectedPostKey))
+        dispatch(getPost(selectedPostKey))
+        dispatch(getComments(selectedPostKey))
     }, [selectedPostKey]);
 
     if (!post.postContent || !post.comments) {
@@ -56,15 +55,15 @@ export const FullPost = ({selectedPostKey}: PropsType) => {
 
     return (
         <div>
-            <Button onClick={() => navigate(-1)} className={styles.backArrow} >
+            <Button onClick={() => navigate(-1)} className={styles.backArrow}>
                 <LeftOutlined/>
             </Button>
 
             <Card title={
                 <Paragraph
-                       style={titleStyle}
-                       className={styles.title}
-                       editable={{onChange: onChangeHandler}}
+                    style={titleStyle}
+                    className={styles.title}
+                    editable={{onChange: onChangeHandler}}
                 >
                     {capitalizeFirstLetter(post.postContent.title)}
                 </Paragraph>}

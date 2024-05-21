@@ -22,7 +22,6 @@ const contentStyle: CSSProperties = {
     lineHeight: '1.55',
     fontWeight: 400,
     boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-    // height: '300px',
 }
 
 const titleStyle: CSSProperties = {

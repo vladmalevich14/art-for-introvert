@@ -4,17 +4,17 @@ import type {MenuProps} from 'antd';
 import {Layout, Spin} from 'antd';
 import {useSelector} from "react-redux";
 import {RootStateType} from "app/store";
-import {usersThunks} from "app/users-reducer";
+import {fetchUsers} from "app/reducers/users-reducer";
 import {useAppDispatch} from "hooks/useAppDispatch";
-import {postsThunks} from "app/posts-reducer";
 import {HeaderComponent} from "components/header/header";
 import {NavBarMenu} from "components/nav-bar-menu/nav-bar-menu";
-import {Navigate, Route, Routes, useLocation, useNavigate,} from "react-router-dom";
+import {Route, Routes, useLocation, useNavigate,} from "react-router-dom";
 import {Posts} from "components/posts/posts";
 import {FullPost} from "components/full-post/full-post";
 import {StartPage} from "components/start-page/start-page";
 import {NotFound} from "components/not-found/not-found";
 import {useResize} from "hooks/useResize";
+import {ScrollToTop} from "utils/scrollToTop";
 
 const {Content, Footer} = Layout;
 
@@ -37,17 +37,15 @@ const App: React.FC = () => {
         label: user.name,
     }));
 
-    useEffect(() => {
-        dispatch(usersThunks.fetchUsers())
-    }, []);
-
-
-    const onSelect = (key: string) => {
+    const onSelectHandler = (key: string) => {
         const userId = users[+key - 1].id
         setSelectedUserKey(key)
-        dispatch(postsThunks.fetchAllPosts(key))
         navigate(`/posts/${userId}`)
     }
+
+    useEffect(() => {
+        dispatch(fetchUsers())
+    }, []);
 
     if (!users.length) {
         return <Spin spinning fullscreen/>
@@ -55,13 +53,12 @@ const App: React.FC = () => {
 
     return (
         <Layout hasSider style={{minHeight: '100vh'}}>
-            <NavBarMenu items={items} onSelect={onSelect} selectedUserKey={selectedUserKey}/>
+            <NavBarMenu items={items} onSelect={onSelectHandler} selectedUserKey={selectedUserKey}/>
             <Layout style={{marginLeft: screenWidth > 575 ? 225 : 80}}>
-                <HeaderComponent />
+                <HeaderComponent/>
                 <Content style={{margin: '24px 16px 0', overflow: 'initial'}}>
+                    <ScrollToTop />
                     <Routes>
-                        {/*<Route element={<Navigate to='/art-for-introvert'/>} path={'/'}/>*/}
-                        {/*<Route path={"/art-for-introvert"} element={<StartPage/>}/>*/}
                         <Route path={"/"} element={<StartPage/>}/>
                         <Route path={'/posts/:userId'}
                                element={<Posts selectedUserKey={selectedUserKey}
@@ -73,7 +70,8 @@ const App: React.FC = () => {
                         <Route element={<NotFound/>} path={'*'}/>
                     </Routes>
                 </Content>
-                <Footer style={{textAlign: 'center'}}>ООО "АРТИНТРОВЕРТ" <CopyrightOutlined /> {new Date().getFullYear()}</Footer>
+                <Footer style={{textAlign: 'center'}}>ООО "АРТИНТРОВЕРТ" <CopyrightOutlined/> {new Date().getFullYear()}
+                </Footer>
             </Layout>
         </Layout>
     );

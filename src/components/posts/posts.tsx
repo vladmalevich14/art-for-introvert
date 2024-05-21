@@ -1,7 +1,7 @@
 import React, {Dispatch, SetStateAction, useEffect} from "react";
 import {Flex, Skeleton} from "antd";
 import {PostCard} from "components/post-card/post-card";
-import {postsThunks} from "app/posts-reducer";
+import {fetchPosts} from "app/reducers/posts-reducer";
 import {useAppDispatch} from "hooks/useAppDispatch";
 import {useSelector} from "react-redux";
 import {RootStateType} from "app/store";
@@ -16,8 +16,8 @@ export const Posts = ({selectedUserKey, setSelectedPostKey}: PropsType) => {
     const posts = useSelector((state: RootStateType) => state.posts)
 
     useEffect(() => {
-        dispatch(postsThunks.fetchAllPosts(selectedUserKey.toString()))
-    }, []);
+        dispatch(fetchPosts(selectedUserKey.toString()))
+    }, [selectedUserKey]);
 
     if (selectedUserKey !== '0' && !posts.length) {
         return <Skeleton paragraph={{rows: 10}} active/>

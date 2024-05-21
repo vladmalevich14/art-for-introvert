@@ -21,7 +21,15 @@ export const NavBarMenu = ({items, onSelect, selectedUserKey}: PropsType) => {
         <div className={styles.navbar}>
             <Sider
                 width={225}
-                style={{overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0,     boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}
+                style={{
+                    overflow: 'auto',
+                    height: '100vh',
+                    position: 'fixed',
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    boxShadow: '0 0 10px rgba(0,0,0,0.1)'
+                }}
                 theme={'light'}
                 breakpoint={'sm'}
             >
